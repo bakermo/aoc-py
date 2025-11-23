@@ -1,13 +1,16 @@
+from collections.abc import Sequence
+
+
 def parse(input):
     return input
 
 
-def part_one(input):
-    print(0)
+def part_one(input: Sequence[str]):
+    return 0
 
 
-def part_two(input):
-    print(0)
+def part_two(input: Sequence[str]):
+    return 0
 
 
 isTest = True
@@ -22,6 +25,6 @@ file = open(f"{filePath}")
 for line in file:
     input.append(str(line.strip()))
 
-part_one(input)
+print(f"Part 1:\n\n{part_one(input)}\n\n")
 
-part_two(input)
+print(f"Part 2:\n\n{part_two(input)}\n\n")
