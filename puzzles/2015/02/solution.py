@@ -2,18 +2,52 @@ from collections.abc import Sequence
 
 
 def parse(input):
-    return input
+    return str(input).split('x')
 
 
 def part_one(input: Sequence[str]):
-    return 0
+    measurements = []
+    for row in input:
+        dimensions = parse(row)
+        # print(dimensions)
+        l = int(dimensions[0])
+        w = int(dimensions[1])
+        h = int(dimensions[2])
+
+        sides = [(l * w), (w * h), (h * l)]
+        smallest = min(sides)
+
+        measurement = sum(map(lambda num: num * 2, sides), smallest)
+        measurements.append(measurement)
+
+    return sum(measurements)
 
 
 def part_two(input: Sequence[str]):
-    return 0
+    measurements = []
+    for row in input:
+        dimensions = parse(row)
+        l = int(dimensions[0])
+        w = int(dimensions[1])
+        h = int(dimensions[2])
+
+        # calculate all possible perimeters
+        perimeters = list(map(lambda num: 2 * int(num), dimensions))
+
+        # then sort them
+        perimeters.sort()
+
+        # then take the first 2
+        perimeter = sum(perimeters[:2])
+
+        area = l * w * h
+        total = perimeter + area
+        measurements.append(total)
+
+    return sum(measurements)
 
 
-isTest = True
+isTest = False
 
 filePath = "sample.txt" if isTest else "input.txt"
 print(f"file: {filePath}")
