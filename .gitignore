@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ignore AoC input files
+**/input.txt
+# except the template folder
+!**/template/input.txt
