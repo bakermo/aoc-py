@@ -3,10 +3,6 @@ from collections.abc import Sequence
 import re
 
 
-def parse(input):
-    return input
-
-
 def part_one(input: Sequence[str]):
     products = []
     for line in input:

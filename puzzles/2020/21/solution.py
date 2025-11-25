@@ -1,10 +1,6 @@
 from collections.abc import Sequence
 
 
-def parse(input):
-    return input
-
-
 def part_one(input: Sequence[str]):
     return 0
 
