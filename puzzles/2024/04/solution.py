@@ -51,9 +51,6 @@ def get_diagonals(grid: Sequence[Sequence[str]], diagonal_length):
     return diagonals
 
 
- 
-
-
 def part_one(input: Sequence[str]):
     match_count = 0
     for row in input:
