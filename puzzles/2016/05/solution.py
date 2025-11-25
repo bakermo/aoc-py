@@ -13,14 +13,14 @@ def part_two(input: Sequence[str]):
     return 0
 
 
-isTest = True
+is_test = True
 
-filePath = "sample.txt" if isTest else "input.txt"
-print(f"file: {filePath}")
+file_path = "sample.txt" if is_test else "input.txt"
+print(f"file: {file_path}")
 
 input = []
 
-file = open(f"{filePath}")
+file = open(f"{file_path}")
 
 for line in file:
     input.append(str(line.strip()))

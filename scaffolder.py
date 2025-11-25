@@ -1,10 +1,10 @@
 import os
 
 
-def scaffold_file(filePath, content=None):
-    if not os.path.exists(filePath):
-        print(f"Creating {filePath}")
-        f = open(filePath, "w")
+def scaffold_file(file_path, content=None):
+    if not os.path.exists(file_path):
+        print(f"Creating {file_path}")
+        f = open(file_path, "w")
         if content is not None:
             f.write(content)
         f.close()

@@ -22,43 +22,43 @@ def part_two(input: Sequence[str]):
     products = []
     instructions = []
 
-    fullInput = "".join(str(s) for s in input)
+    full_input = "".join(str(s) for s in input)
 
-    domatches = re.finditer(f"do\(\)", fullInput)
-    for d in domatches:
+    do_matches = re.finditer(f"do\(\)", full_input)
+    for d in do_matches:
         instructions.append(d)
-    dontmatches = re.finditer(f"don\'t\(\)", fullInput)
-    for d in dontmatches:
+    dont_matches = re.finditer(f"don\'t\(\)", full_input)
+    for d in dont_matches:
         instructions.append(d)
 
-    mulmatches = re.finditer(f"mul\((\d+),(\d+)\)", fullInput)
+    mulmatches = re.finditer(f"mul\((\d+),(\d+)\)", full_input)
     for m in mulmatches:
         instructions.append(m)
 
     # span(0) is equivalent
     instructions.sort(key=lambda i: i.span())
 
-    isDoing = True
+    is_doing = True
     for i in instructions:
         if i.group(0) == 'do()':
-            isDoing = True
+            is_doing = True
         elif i.group(0) == 'don\'t()':
-            isDoing = False
-        elif isDoing:
+            is_doing = False
+        elif is_doing:
             x, y = map(int, i.groups())
             products.append(x * y)
 
     return sum(products)
 
 
-isTest = False
+is_test = False
 
-filePath = "sample.txt" if isTest else "input.txt"
-print(f"file: {filePath}")
+file_path = "sample.txt" if is_test else "input.txt"
+print(f"file: {file_path}")
 
 input = []
 
-file = open(f"{filePath}")
+file = open(f"{file_path}")
 
 for line in file:
     input.append(str(line.strip()))
