@@ -1,5 +1,8 @@
 from collections.abc import Sequence
+# from dataclasses import dataclass, field
+
 import re
+from typing import List
 
 
 # TODO: Convert this to a helper mdodule!
@@ -51,6 +54,31 @@ def get_diagonals(grid: Sequence[Sequence[str]], diagonal_length):
     return diagonals
 
 
+class Cross:
+    def __init__(self, row, col):
+        self.row = row
+        self.col = col
+        self.top_to_bottom = ""
+        self.bottom_to_top = ""
+
+
+def get_centered_crosses(grid: Sequence[Sequence[str]], cross_length) -> List[Cross]:
+    safety_bound = cross_length // 2  # intentional flooring division here
+    crosses = []
+    rows = len(grid)
+    cols = len(grid[0])
+
+    for row in range(0, rows):
+        for col in range(0, cols):
+            if row + safety_bound < rows and col + safety_bound < cols and row - safety_bound >= 0 and col-safety_bound >= 0:
+                cross = Cross(row, col)
+                for k in range(-safety_bound, safety_bound + 1):
+                    cross.top_to_bottom += grid[row + k][col + k]
+                    cross.bottom_to_top += grid[row - k][col + k]
+                crosses.append(cross)
+    return crosses
+
+
 def part_one(input: Sequence[str]):
     match_count = 0
     for row in input:
@@ -78,10 +106,21 @@ def part_one(input: Sequence[str]):
 
 
 def part_two(input: Sequence[str]):
-    return 0
+    grid = get_grid(input)
+    crosses = get_centered_crosses(grid, 3)
+
+    xmas_count = 0
+    for cross in crosses:
+        if (
+            (cross.top_to_bottom == "MAS" or cross.top_to_bottom[::-1] == "MAS") and
+            (cross.bottom_to_top ==
+             "MAS" or cross.bottom_to_top[::-1] == "MAS")
+        ):
+            xmas_count += 1
+    return xmas_count
 
 
-is_test = True
+is_test = False
 
 file_path = "sample.txt" if is_test else "input.txt"
 print(f"file: {file_path}")
