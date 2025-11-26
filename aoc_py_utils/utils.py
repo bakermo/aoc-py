@@ -1,5 +1,10 @@
 from collections.abc import Sequence
-from typing import List
+from typing import List, NamedTuple
+
+
+class Position(NamedTuple):
+    row: int
+    col: int
 
 
 class Cross:
@@ -19,6 +24,10 @@ def print_grid(grid: Sequence[Sequence[str]]):
     for row in grid:
         print("".join(row))
     print('\n')
+
+
+def is_in_bounds(grid: Sequence[Sequence[str]], row, col):
+    return row >= 0 and row < len(grid) and col >= 0 and col < len(grid[0])
 
 
 def get_columns(input: Sequence[str]):
@@ -60,7 +69,7 @@ def get_centered_crosses(grid: Sequence[Sequence[str]], cross_length) -> List[Cr
 
     for row in range(0, rows):
         for col in range(0, cols):
-            if row + safety_bound < rows and col + safety_bound < cols and row - safety_bound >= 0 and col-safety_bound >= 0:
+            if row + safety_bound < rows and col + safety_bound < cols and row - safety_bound >= 0 and col - safety_bound >= 0:
                 cross = Cross(row, col)
                 for k in range(-safety_bound, safety_bound + 1):
                     cross.top_to_bottom += grid[row + k][col + k]
