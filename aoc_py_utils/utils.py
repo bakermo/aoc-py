@@ -1,4 +1,5 @@
 from collections.abc import Sequence
+from enum import Enum
 from typing import List, NamedTuple
 
 
@@ -6,6 +7,11 @@ class Position(NamedTuple):
     row: int
     col: int
 
+class Direction(Enum):
+   UP = 0
+   RIGHT = 1
+   DOWN = 2
+   LEFT = 3
 
 class Cross:
     def __init__(self, row, col):
@@ -14,6 +20,43 @@ class Cross:
         self.top_to_bottom = ""
         self.bottom_to_top = ""
 
+def turn_right(direction: Direction) -> Direction:
+    return Direction((direction.value + 1) % 4)
+
+def turn_left(direction: Direction) -> Direction:
+    return Direction((direction.value + 3) % 4)
+
+def get_next_pos(row: int, col:int, direction:Direction) -> Position:
+    if direction == Direction.UP:
+        return Position(row - 1, col)
+    elif direction == Direction.RIGHT:
+        return Position(row, col + 1)
+    elif direction == Direction.DOWN:
+        return Position(row + 1, col)
+    else:
+        return Position(row, col - 1)
+    
+def get_test_neighbors(position: Position) -> List[Position]:
+    positions = []
+    # below
+    positions.append(Position(position.row + 1, position.col))
+    positions.append(Position(position.row + 1, position.col - 1))
+    positions.append(Position(position.row + 1, position.col + 1))
+
+    # left and right
+    positions.append(Position(position.row, position.col - 1))
+    positions.append(Position(position.row, position.col + 1))
+
+    # above
+    positions.append(Position(position.row - 1, position.col))
+    positions.append(Position(position.row - 1, position.col - 1))
+    positions.append(Position(position.row - 1, position.col + 1))
+
+    return positions
+
+
+def get_pos_next_pos(position: Position, direction:Direction) -> Position:
+    return get_next_pos(position.row, position.col, direction)
 
 def get_grid(input: Sequence[str]):
     return [list(row) for row in input]

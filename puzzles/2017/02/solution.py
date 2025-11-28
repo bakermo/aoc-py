@@ -1,9 +1,9 @@
 
-# import sys
-# # we need this obnoxiousness to reference the utils package in repo root
-# sys.path.append("../../../")
-# from aoc_py_utils import utils
 from collections.abc import Sequence
+import sys
+# we need this obnoxiousness to reference the utils package in repo root
+sys.path.append("../../../")
+from aoc_py_utils import utils
 
 
 def part_one(input: Sequence[str]):
@@ -31,7 +31,7 @@ def part_two(input: Sequence[str]):
     return sum(diffs)
 
 
-is_test = False
+is_test = True
 
 file_path = "sample.txt" if is_test else "input.txt"
 print(f"file: {file_path}")
