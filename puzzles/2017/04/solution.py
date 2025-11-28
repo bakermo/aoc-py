@@ -13,7 +13,7 @@ def part_one(input: Sequence[str]):
         used = set();
         valid = True
         for t in tokens:
-            print(used)
+            # print(used)
             if t not in used:
                 used.add(t)
             else:
@@ -24,17 +24,6 @@ def part_one(input: Sequence[str]):
             
     return valid_count
 
-def sort_str(token: str) -> str:
-    cs = []
-    for c in token:
-        cs.append(c)
-
-    acc = ''
-    cs.sort()
-    for c in cs:
-        acc += c
-
-    return acc
 
 def part_two(input: Sequence[str]):
     valid_count = 0
@@ -44,7 +33,7 @@ def part_two(input: Sequence[str]):
         valid = True
         for t in tokens:
             # print(f't: {t}')
-            s = sort_str(t)
+            s = ''.join(sorted(t))
             # print(f's: {s}')
             if s not in used:
                 used.add(s)
