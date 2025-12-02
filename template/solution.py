@@ -4,6 +4,7 @@
 # sys.path.append("../../../")
 # from aoc_py_utils import utils
 from collections.abc import Sequence
+import time
 
 
 def part_one(input: Sequence[str]):
@@ -30,6 +31,14 @@ file = open(f"{file_path}")
 for line in file:
     input.append(str(line.strip()))
 
-print(f"Part 1:\n\n{part_one(input)}\n\n")
+print(f"Starting part 1...\n")
+start = time.perf_counter()
+print(f"Part 1:\n\n{part_one(input)}\n")
+elapsed = time.perf_counter() - start
+print(f"Finished part 1 in {elapsed:.6f} seconds\n\n")
 
-print(f"Part 2:\n\n{part_two(input)}\n\n")
+print(f"Starting part 2...\n")
+start = time.perf_counter()
+print(f"Part 2:\n\n{part_two(input)}\n")
+elapsed = time.perf_counter() - start
+print(f"Finished part 2 in {elapsed:.6f} seconds")
