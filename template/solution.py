@@ -7,11 +7,15 @@ from collections.abc import Sequence
 
 
 def part_one(input: Sequence[str]):
-    return 0
+    result = 0
+
+    return result
 
 
 def part_two(input: Sequence[str]):
-    return 0
+    result = 0
+
+    return result
 
 
 is_test = True
