@@ -1,17 +1,35 @@
 from collections.abc import Sequence
 from enum import Enum
+from functools import wraps
+import time
 from typing import List, NamedTuple
+
+
+def aoctimer(descriptor):
+    def decorator(base_fn):
+        @wraps(base_fn)
+        def timer_fn(*args):
+            print(f"Starting {descriptor}...\n{descriptor}:\n")
+            start = time.perf_counter()
+            base_fn_result = base_fn(*args)
+            print(f"{base_fn_result}\n")
+            elapsed = time.perf_counter() - start
+            print(f"Finished {descriptor} in {elapsed:.6f} seconds\n\n")
+        return timer_fn
+    return decorator
 
 
 class Position(NamedTuple):
     row: int
     col: int
 
+
 class Direction(Enum):
-   UP = 0
-   RIGHT = 1
-   DOWN = 2
-   LEFT = 3
+    UP = 0
+    RIGHT = 1
+    DOWN = 2
+    LEFT = 3
+
 
 class Cross:
     def __init__(self, row, col):
@@ -20,13 +38,16 @@ class Cross:
         self.top_to_bottom = ""
         self.bottom_to_top = ""
 
+
 def turn_right(direction: Direction) -> Direction:
     return Direction((direction.value + 1) % 4)
+
 
 def turn_left(direction: Direction) -> Direction:
     return Direction((direction.value + 3) % 4)
 
-def get_next_pos(row: int, col:int, direction:Direction) -> Position:
+
+def get_next_pos(row: int, col: int, direction: Direction) -> Position:
     if direction == Direction.UP:
         return Position(row - 1, col)
     elif direction == Direction.RIGHT:
@@ -35,7 +56,8 @@ def get_next_pos(row: int, col:int, direction:Direction) -> Position:
         return Position(row + 1, col)
     else:
         return Position(row, col - 1)
-    
+
+
 def get_test_neighbors(position: Position) -> List[Position]:
     positions = []
     # below
@@ -55,8 +77,9 @@ def get_test_neighbors(position: Position) -> List[Position]:
     return positions
 
 
-def get_pos_next_pos(position: Position, direction:Direction) -> Position:
+def get_pos_next_pos(position: Position, direction: Direction) -> Position:
     return get_next_pos(position.row, position.col, direction)
+
 
 def get_grid(input: Sequence[str]):
     return [list(row) for row in input]

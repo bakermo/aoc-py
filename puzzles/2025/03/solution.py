@@ -1,13 +1,13 @@
 
-# import sys
-# # we need this obnoxiousness to reference the utils package in repo root
-# sys.path.append("../../../")
-# from aoc_py_utils import utils
+import sys
+# we need this obnoxiousness to reference the utils package in repo root
+sys.path.append("../")
+sys.path.append("../../../")
+from aoc_py_utils import utils
 from collections.abc import Sequence
-import math
-import time
 
 
+@utils.aoctimer("Part 1")
 def part_one(input: Sequence[str]):
     result = 0
     for line in input:
@@ -23,6 +23,7 @@ def part_one(input: Sequence[str]):
     return result
 
 
+@utils.aoctimer("Part 1")
 def part_two(input: Sequence[str]):
     result = 0
 
@@ -64,14 +65,6 @@ file = open(f"{file_path}")
 for line in file:
     input.append(str(line.strip()))
 
-print(f"Starting part 1...\n")
-start = time.perf_counter()
-print(f"Part 1:\n\n{part_one(input)}\n")
-elapsed = time.perf_counter() - start
-print(f"Finished part 1 in {elapsed:.6f} seconds\n\n")
+part_one(input)
 
-print(f"Starting part 2...\n")
-start = time.perf_counter()
-print(f"Part 2:\n\n{part_two(input)}\n")
-elapsed = time.perf_counter() - start
-print(f"Finished part 2 in {elapsed:.6f} seconds")
+part_two(input)
