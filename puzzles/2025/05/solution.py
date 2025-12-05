@@ -57,32 +57,32 @@ def part_two(input: Sequence[str]):
     while True:
         to_remove = set()
         to_add = []
-        print(f"\nranges: {ranges}")
+        # print(f"\nranges: {ranges}")
         ranges.sort()
         for i, r in enumerate(ranges):
             if i > 0:
                 last = ranges[i - 1]
                 if last[1] >= r[0]:
-                    print(f"last 1 r 0: {last[1]}, {r[0]}")
+                    # print(f"last 1 r 0: {last[1]}, {r[0]}")
                     # print(f"length of range {i} {r}: {r[1] - r[0]}")
                     to_remove.add(last)
-                    print(f"removing last: {last}")
+                    # print(f"removing last: {last}")
                     to_remove.add(r)
-                    print(f"removing r: {r}")
+                    # print(f"removing r: {r}")
                     n = (last[0], max(last[1], r[1]))
                     to_add.append(n)
-                    print(f"adding: {n}")
+                    # print(f"adding: {n}")
             # rset.append((int(x), int(y)))
             # for i in range(int(x), int(y) + 1):
         ranges = list(filter(lambda r: r not in to_remove, ranges)) + to_add
-        print(f'new ranges:{ranges}')
+        # print(f'new ranges:{ranges}')
         # print(to_remove)
         # print(to_add)
 
         if len(to_remove) == 0:
             break
         # rset.add(i)
-    print(f"\nranges at end: {ranges}\n")
+    # print(f"\nranges at end: {ranges}\n")
     for r in ranges:
         result += ((r[1] + 1) - r[0])
 
