@@ -107,6 +107,17 @@ def get_columns(input: Sequence[str]):
     return columns
 
 
+def get_columns_lists(input: Sequence[str]):
+    rows = input
+    columns = []
+    for i in range(0, len(rows[0])):
+        col = []
+        for j in range(0, len(rows)):
+            col.append(rows[j][i])
+        columns.append(col)
+    return columns
+
+
 def get_diagonals(grid: Sequence[Sequence[str]], diagonal_length):
     diagonals_safety_bound = diagonal_length - 1
     diagonals = []
