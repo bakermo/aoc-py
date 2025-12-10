@@ -3,6 +3,7 @@ from enum import Enum
 from functools import wraps
 import time
 from typing import List, NamedTuple
+from datetime import timedelta
 
 
 def aoctimer(descriptor):
@@ -14,7 +15,8 @@ def aoctimer(descriptor):
             base_fn_result = base_fn(*args)
             print(f"{base_fn_result}\n")
             elapsed = time.perf_counter() - start
-            print(f"Finished {descriptor} in {elapsed:.6f} seconds\n\n")
+            print(
+                f"Finished {descriptor} in {elapsed:.6f} seconds\n\n {str(timedelta(seconds=elapsed))}")
         return timer_fn
     return decorator
 
