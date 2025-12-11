@@ -1,0 +1,63 @@
+
+# neither BFS or DFS is guaranteed to find all paths
+# typically it terminates once target is found
+# in both algorithms, they have to slightly change
+# implementation to find all paths
+# but if I need to find all paths, DFS is usually more 
+# efficient
+
+
+# When I need a "shortest path"
+# BFS is gauranteed to find the shortest path
+# in an unweighted graph as it finds the 
+# mininmum number of hops between nodes
+# also can be used when working with layers 
+# or needing to process nodes in order of distance
+# from the source
+
+# First - In - First - Out (FIFO)
+
+# BFS using a queue
+BFS(graph, start_node):
+    create a queue Q
+    create a set visited
+    enqueue start_node into Q
+    mark start_node as visited
+
+    while Q is not empty:
+        current_node = dequeue(Q)
+        process current_node
+
+        for each neighbor in graph[current_node]:
+            if neighbor is not in visited:
+                mark neighbor as visited
+                enqueue neighbor into Q
+
+
+# Use DFS when needing to exhaustively search
+# DFS uses less memory than BFS
+# can be used for cycle detection
+# Last - In - First - Out (FILO)
+
+# a recursive DFS
+function DFS(graph, node):
+    if node is visited:
+        return
+    mark node as visited
+    process(node) // e.g., print or store the node
+    for each neighbor in graph[node]:
+        if neighbor is not visited:
+            DFS(graph, neighbor)
+
+# an iterative DFS using a stack to traverse
+function DFS(graph, startNode):
+    visited = set()
+    stack = [startNode]
+    while stack is not empty:
+        node = stack.pop()
+        if node not in visited:
+            mark node as visited
+            process(node)
+            for each neighbor in graph[node]:
+                if neighbor not in visited:
+                    stack.push(neighbor)
